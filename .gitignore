@@ -2,3 +2,4 @@
 /.vscode
 *.hide
 *.log
+*.config.json
