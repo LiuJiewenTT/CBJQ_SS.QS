@@ -3,7 +3,7 @@
 
 #define INTERNAL_PROGRAM_NAME "CBJQ_SS.QS Core"
 #define PROGRAM_NAME_PRETTY "CBJQ_SS QuickStart"
-#define PROGRAM_VERSION "v1.0.0"
+#define PROGRAM_VERSION "1.0.0"
 #define AUTHOR_NAME "LiuJiewenTT"
 #define AUTHOR_EMAIL "liuljwtt@163.com"
 #define BUILD_TIMEZONE "UTC+8"
