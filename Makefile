@@ -41,7 +41,7 @@ build/build/utils.o: utils/utils.c
 # build/build/jagged_array.o: utils/jagged_array.tpp
 # 	$(CPPC) $(CFLAGS) -c $< -o $@
 
-build/build/program_info.o: program_info.c
+build/build/program_info.o: program_info.c build/build/version.o
 	$(CC) $(CFLAGS) -c $< -o $@
 
 build/build/cJSON.o: utils/cJSON/cJSON.c
