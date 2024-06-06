@@ -1,11 +1,11 @@
 #ifndef PROGRAM_INFO_H
 #define PROGRAM_INFO_H
 
-#define INTERNAL_PROGRAM_NAME "CBJQ_SS.QS Core"
-#define PROGRAM_NAME_PRETTY "CBJQ_SS QuickStart"
-#define PROGRAM_VERSION "1.0.0"
-#define AUTHOR_NAME "LiuJiewenTT"
-#define AUTHOR_EMAIL "liuljwtt@163.com"
+// 修改版本号去version.rc改
+#include "version.rc"
+#define PROGRAM_VERSION VER_PRODUCTVERSION_STR
+#define PROGRAMFILE_VERSION VER_FILEVERSION_STR
+
 #define BUILD_TIMEZONE "UTC+8"
 
 #ifdef __GNUC__

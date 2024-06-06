@@ -4,3 +4,4 @@
 *.log
 *.config.json
 /build
+init_gnu_env.bat
