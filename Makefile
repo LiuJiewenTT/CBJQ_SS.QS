@@ -48,6 +48,7 @@ build/build/cJSON.o: utils/cJSON/cJSON.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 build/build/version.o: version.rc
+#	$(WINDRES) --preprocessor-arg="-DUNICODE" $< $@
 	$(WINDRES) $< $@
 
 define clean_file

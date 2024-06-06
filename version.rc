@@ -23,7 +23,7 @@ FILESUBTYPE 0x0L
         BLOCK "040904b0"
         {
             VALUE "CompanyName", "\0"
-            VALUE "FileDescription", "ã€Šå°˜ç™½ç¦åŒºåˆ‡æœå™¨ã€‹ä¸€é”®å¯åŠ¨ç¨‹åºï¼Œç¬¬2+ä»£\0"
+            VALUE "FileDescription", "¡¶³¾°×½ûÇøÇÐ·þÆ÷¡·Ò»¼üÆô¶¯³ÌÐò£¬µÚ2+´ú\0"
             VALUE "FileVersion", VER_FILEVERSION_STR
             VALUE "InternalName", "CBJQ_SS.QS Core\0"
             VALUE "OriginalFilename", "CBJQ_SS.QS.exe\0"
