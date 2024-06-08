@@ -9,7 +9,7 @@ WINDRES = M:\\Temp_Proj\\A29\\x64\\winlibs-x86_64-mcf-seh-gcc-13.2.0-llvm-16.0.6
 CFLAGS = -I"./"
 
 # 源文件和目标文件
-SRC = CBJQ_SS.QS.cpp
+SRC = CBJQ_SS.QS.c
 OBJ = \
 build/build/main.o\
 build/build/utils.o\
@@ -41,7 +41,7 @@ build/build/utils.o: utils/utils.c
 # build/build/jagged_array.o: utils/jagged_array.tpp
 # 	$(CPPC) $(CFLAGS) -c $< -o $@
 
-build/build/program_info.o: program_info.c build/build/version.o
+build/build/program_info.o: program_info.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 build/build/cJSON.o: utils/cJSON/cJSON.c
