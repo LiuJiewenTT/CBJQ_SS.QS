@@ -136,7 +136,7 @@ int main(int argc, char **argv){
     sprintf(config_filename, "%s%s", program_name_noext, config_filename_suffix);
     if( access(config_filename, 0|2|4) ){
         printf("不存在(可读取、写入的)配置文件。\n");
-        f1 = fopen(config_filename, "w");
+        f1 = fopen(config_filename, "wb");
         if( f1 == NULL ){
             printf("配置文件创建失败。\n");
             return 0;
