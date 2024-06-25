@@ -1,6 +1,6 @@
 ---
 LANG: zh_CN.UTF-8
-date: 2024-06-06 12:54:00 +0800
+date: 2024-06-25 23:38:00 +0800
 ---
 
 # CBJQ_SS QuickStart
@@ -38,19 +38,21 @@ date: 2024-06-06 12:54:00 +0800
 ### 复用配置
 
 1. 复制一份程序，从哪都行（反正只要求你做重命名，程序都是一样的）。在`CBJQ_SS.QS.`和`.exe`之间加入服务器条目名称。
-    > 例如：要添加官服`kingsoft`条目：复制“*CBJQ_SS.QS.exe*”，粘贴并重命名为“*CBJS_SS.QS.kingsoft.exe*”。
+   
+> 例如：要添加官服`kingsoft`条目：复制“*CBJQ_SS.QS.exe*”，粘贴并重命名为“*CBJQ_SS.QS.kingsoft.exe*”。
 
 2. 【可选步骤】右键->发送到桌面快捷方式。
 
 3. 【可选步骤】隐藏窗口（后台运行）：复制新文件名，创建任意文件，重命名为：复制的完整文件名+".hide"。
-    > 例如：创建一个名为“*CBJS_SS.QS.kingsoft.exe.hide*”的空文件。
+    > 例如：创建一个名为“*CBJQ_SS.QS.kingsoft.exe.hide*”的空文件。
 
     > 注意：完整文件名包括扩展名，这一步是在修改文件扩展名，请确保你打开了扩展名显示并真的是修改扩展名而不是文件名。
 
 ### 高阶配置
 
 > 配置文件名称为：对应程序的文件名（无扩展名）+`.config.json`。
-> > 例如：程序为“*CBJS_SS.QS.kingsoft.exe*”，配置文件名为“*CBJS_SS.QS.kingsoft.config.json*”
+>
+> > 例如：程序为“**CBJQ_SS.QS.kingsoft.exe*”，配置文件名为“*CBJQ_SS.QS.kingsoft.config.json*”
 
 > *请根据你自己的需要决定*，否则请使用默认配置。**默认配置会在首次运行时自动生成**。
 
@@ -68,6 +70,8 @@ date: 2024-06-06 12:54:00 +0800
     - 示例新参数值：`".\\icon1.ico"`
 
 > 通知：现在已禁止在配置文件中设置要选择的服务器条目了，请在文件名中指示。
+
+> 有些外部程序启动时不在此程序所在目录启动，导致工作目录错误而读取不到配置。为了应对这种问题，请在本程序所在位置创建"*CBJQ_SS.QS.\*.exe.enforce_pwd*"文件。例如："*CBJQ_SS.QS.kingsoft.exe.enforce_pwd*"
 
 ## 构建
 

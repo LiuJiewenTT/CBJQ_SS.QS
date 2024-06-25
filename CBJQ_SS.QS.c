@@ -22,6 +22,8 @@
     }\
 
 
+int flag_hide;
+char cwd[2048];
 char path_delimeter = '\\';
 char program_name[2048];
 char program_name_noext[2048];
@@ -65,20 +67,39 @@ int main(int argc, char **argv){
     SetConsoleOutputCP(CP_UTF8);
     setlocale(LC_CTYPE, "zh_cn.UTF-8");
     HICON hIcon = NULL;
-    sprintf(tempstr1, "%s.hide", argv[0]);
-    if( file_exists(tempstr1) ){
-        ShowWindow(hwnd, SW_HIDE);
-        sprintf(tempstr1, "%s.log", argv[0]);
-        freopen(tempstr1, "w", stdout);
-        printf("hide. [PID=%d].\n", getpid());
-        // Sleep(3000);
-    }
 
     char config_content[config_content_maxsize];    // 512 KB
     char backend_path[2048];
     char backend_path_abspath[2048];
     char start_options_str[2048];
     char executeCmd[2048];
+
+    int restart_cnt = 0;
+
+restart_label:
+
+    if( restart_cnt > 10 ){
+        swprintf(tempwstr1, TEMPWSTR_LENGTH, L"错误：程序陷入反复重启。");
+        printf("%ls\n", tempwstr1);
+        MessageBox(hwnd, (tempwstr1), (internal_program_name_wstr), MB_OK);
+        return 0;
+    }
+
+    sprintf(tempstr1, "%s.hide", argv[0]);
+    if( file_exists(tempstr1) ){
+        flag_hide = 1;
+        ShowWindow(hwnd, SW_HIDE);
+        sprintf(tempstr1, "%s.log", argv[0]);
+        freopen(tempstr1, "w", stdout);
+        printf("hide. [PID=%d].\n", getpid());
+        // Sleep(3000);
+    }
+    else {
+        if( flag_hide ) {
+            ShowWindow(hwnd, SW_NORMAL);
+            freopen("CON", "w", stdout);
+        }
+    }
 
     // 打印程序信息。
     #define temp_divider "####################################"
@@ -89,7 +110,7 @@ int main(int argc, char **argv){
 
     printf("cmd=%s\n", argv[0]);
     
-    // 获取程序文件名。
+    // 获取程序文件名和程序所在目录。
     p1 = strrchr(argv[0], path_delimeter);
     if( p1 == NULL ){
         strcpy(program_name, argv[0]);
@@ -104,12 +125,56 @@ int main(int argc, char **argv){
     strcpy(tempstr1, program_working_dir);
     p1 = _fullpath(program_working_dir, tempstr1, 2048);
     if( p1 == NULL ){
-        swprintf(tempwstr1, TEMPWSTR_LENGTH, L"错误：绝对路径推算失败。");
+        swprintf(tempwstr1, TEMPWSTR_LENGTH, L"错误：pwd绝对路径推算失败。");
         printf("%ls\n", tempwstr1);
         MessageBox(hwnd, (tempwstr1), (internal_program_name_wstr), MB_OK);
         return 0;
     }
     printf("program_working_dir=%s\n", program_working_dir);
+
+    // 获取当前工作目录
+    if (getcwd(cwd, sizeof(cwd)) != NULL) {
+        // 统一处理
+        if( cwd[strlen(cwd)-1] != '\\' ){
+            cwd[strlen(cwd)+1] = 0;
+            cwd[strlen(cwd)] = '\\';
+        }
+        strcpy(tempstr1, cwd);
+        p1 = _fullpath(cwd, tempstr1, 2048);
+        if( p1 == NULL ){
+            swprintf(tempwstr1, TEMPWSTR_LENGTH, L"错误：cwd绝对路径推算失败。");
+            printf("%ls\n", tempwstr1);
+            MessageBox(hwnd, (tempwstr1), (internal_program_name_wstr), MB_OK);
+            return 0;
+        }
+        printf("Current working directory=%s\n", cwd);
+    } else {
+        swprintf(tempwstr1, TEMPWSTR_LENGTH, L"错误：无法获取当前工作目录。");
+        printf("%ls\n", tempwstr1);
+        MessageBox(hwnd, (tempwstr1), (internal_program_name_wstr), MB_OK);
+        return 0;
+    }
+
+    // 检查程序目录是否存在强制使用配置的标志
+    sprintf(tempstr1, "%s.enforce_pwd", argv[0]);
+    if( file_exists(tempstr1) ){
+        printf("Flag: enforce_pwd found.\n");
+        // 比较程序目录和当前工作目录
+        if( strcmp(cwd, program_working_dir) ){
+            printf("cwd != pwd\n");
+            // 改变当前工作目录
+            if (chdir(program_working_dir) == 0) {
+                printf("Successfully changed directory to %s\n", program_working_dir);
+                ++restart_cnt;
+                goto restart_label;
+            } else {
+                swprintf(tempwstr1, TEMPWSTR_LENGTH, L"错误：无法更换当前工作目录到程序所在目录。");
+                printf("%ls\n", tempwstr1);
+                MessageBox(hwnd, (tempwstr1), (internal_program_name_wstr), MB_OK);
+                return 0;
+            } 
+        }
+    }
     
     // 检查程序文件名。
     valid_server_filename_prefix_length = strlen(valid_server_filename_prefix);
