@@ -232,12 +232,13 @@ int main(int argc, char **argv){
         return 0;
     }
     printf("backend_path_abspath=%s\n", backend_path_abspath);
+    sprintf(tempstr1, "\"%s\"", backend_path_abspath);
     
     // 启动！
     printf("启动！\n");
     fflush(stdout);
     // execlp("cmd", "/C", backend_path_abspath, start_options_str, server_name);
-    spawnlp(_P_WAIT, "cmd", "/C", backend_path_abspath, start_options_str, server_name, NULL);
+    spawnlp(_P_WAIT, "cmd", "/C", tempstr1, start_options_str, server_name, NULL);
 
     return 0;
 }
