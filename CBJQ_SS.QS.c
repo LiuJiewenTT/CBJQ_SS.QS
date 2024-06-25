@@ -101,6 +101,15 @@ int main(int argc, char **argv){
         program_working_dir[p1-argv[0]] = 0;
     }
     printf("program_name=%s\n", program_name);
+    strcpy(tempstr1, program_working_dir);
+    p1 = _fullpath(program_working_dir, tempstr1, 2048);
+    if( p1 == NULL ){
+        swprintf(tempwstr1, TEMPWSTR_LENGTH, L"错误：绝对路径推算失败。");
+        printf("%ls\n", tempwstr1);
+        MessageBox(hwnd, (tempwstr1), (internal_program_name_wstr), MB_OK);
+        return 0;
+    }
+    printf("program_working_dir=%s\n", program_working_dir);
     
     // 检查程序文件名。
     valid_server_filename_prefix_length = strlen(valid_server_filename_prefix);
@@ -225,7 +234,7 @@ int main(int argc, char **argv){
 
     // 处理路径
     p1 = _fullpath(backend_path_abspath, backend_path, 2048);
-    if( p1 ==NULL ){
+    if( p1 == NULL ){
         swprintf(tempwstr1, TEMPWSTR_LENGTH, L"错误：绝对路径推算失败。");
         printf("%ls\n", tempwstr1);
         MessageBox(hwnd, (tempwstr1), (internal_program_name_wstr), MB_OK);

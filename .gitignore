@@ -6,3 +6,4 @@
 /build
 init_gnu_env.bat
 make.bat
+/keep_local
