@@ -22,7 +22,7 @@
     }\
 
 
-int flag_hide;
+int flag_hide = 0;
 char cwd[2048];
 char path_delimeter = '\\';
 char program_name[2048];
@@ -87,15 +87,18 @@ restart_label:
 
     sprintf(tempstr1, "%s.hide", argv[0]);
     if( file_exists(tempstr1) ){
-        flag_hide = 1;
-        ShowWindow(hwnd, SW_HIDE);
-        sprintf(tempstr1, "%s.log", argv[0]);
-        freopen(tempstr1, "w", stdout);
-        printf("hide. [PID=%d].\n", getpid());
-        // Sleep(3000);
+        if( flag_hide == 0 ){
+            flag_hide = 1;
+            ShowWindow(hwnd, SW_HIDE);
+            sprintf(tempstr1, "%s.log", argv[0]);
+            freopen(tempstr1, "w", stdout);
+            printf("hide. [PID=%d].\n", getpid());
+            // Sleep(3000);
+        }
     }
     else {
         if( flag_hide ) {
+            flag_hide = 0;
             ShowWindow(hwnd, SW_NORMAL);
             freopen("CON", "w", stdout);
         }
@@ -135,10 +138,10 @@ restart_label:
     // 获取当前工作目录
     if (getcwd(cwd, sizeof(cwd)) != NULL) {
         // 统一处理
-        if( cwd[strlen(cwd)-1] != '\\' ){
-            cwd[strlen(cwd)+1] = 0;
-            cwd[strlen(cwd)] = '\\';
-        }
+        // if( cwd[strlen(cwd)-1] != '\\' ){
+        //     cwd[strlen(cwd)+1] = 0;
+        //     cwd[strlen(cwd)] = '\\';
+        // }
         strcpy(tempstr1, cwd);
         p1 = _fullpath(cwd, tempstr1, 2048);
         if( p1 == NULL ){
