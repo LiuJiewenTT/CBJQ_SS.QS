@@ -11,7 +11,7 @@ date: 2024-06-25 23:38:00 +0800
 
 开源许可协议：*MIT License*
 
-**快速跳转:** (暂无)
+**快速跳转:** [代码库](https://github.com/LiuJiewenTT/CBJQ_SS.QS) 
 
 ## 特点
 
