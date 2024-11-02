@@ -39,12 +39,12 @@ date: 2024-06-25 23:38:00 +0800
 
 1. 复制一份程序，从哪都行（反正只要求你做重命名，程序都是一样的）。在`CBJQ_SS.QS.`和`.exe`之间加入服务器条目名称。
    
-> 例如：要添加官服`kingsoft`条目：复制“*CBJQ_SS.QS.exe*”，粘贴并重命名为“*CBJQ_SS.QS.kingsoft.exe*”。
+> 例如：要添加官服`kingsoft`条目：复制“*CBJQ_SS.QS.exe*”，粘贴并重命名为“*CBJQ_SS.QS<span style="color:green">.kingsoft</span>.exe*”。
 
 2. 【可选步骤】右键->发送到桌面快捷方式。
 
 3. 【可选步骤】隐藏窗口（后台运行）：复制新文件名，创建任意文件，重命名为：复制的完整文件名+".hide"。
-    > 例如：创建一个名为“*CBJQ_SS.QS.kingsoft.exe.hide*”的空文件。
+    > 例如：创建一个名为“*CBJQ_SS.QS.kingsoft.exe<span style="color:green">.hide</span>*”的空文件。
 
     > 注意：完整文件名包括扩展名，这一步是在修改文件扩展名，请确保你打开了扩展名显示并真的是修改扩展名而不是文件名。
 
@@ -52,9 +52,14 @@ date: 2024-06-25 23:38:00 +0800
 
 > 配置文件名称为：对应程序的文件名（无扩展名）+`.config.json`。
 >
-> > 例如：程序为“**CBJQ_SS.QS.kingsoft.exe*”，配置文件名为“*CBJQ_SS.QS.kingsoft.config.json*”
+> > 例如：程序为“*CBJQ_SS.QS.kingsoft<span style="color:red">.exe</span>*”，配置文件名为“*CBJQ_SS.QS.kingsoft<span style="color:green">.config.json</span>*”
 
 > *请根据你自己的需要决定*，否则请使用默认配置。**默认配置会在首次运行时自动生成**。
+
+> <small>致 json 小白：<br>1. 
+> 字符串中，Windows的路径分隔符需要转义，也就是双反斜杠(`\\`)。<br>2. 
+> 严格的 json 与 jsonc 或是 json5 不同，不支持注释。<br>3.  json的末尾不能多或者少了逗号，会语法错误。
+> </small>
 
 - 修改后端所在：
     - 键：`"path_of_main"`
@@ -71,7 +76,7 @@ date: 2024-06-25 23:38:00 +0800
 
 > 通知：现在已禁止在配置文件中设置要选择的服务器条目了，请在文件名中指示。
 
-> 有些外部程序启动时不在此程序所在目录启动，导致工作目录错误而读取不到配置。为了应对这种问题，请在本程序所在位置创建"*CBJQ_SS.QS.\*.exe.enforce_pwd*"文件。例如："*CBJQ_SS.QS.kingsoft.exe.enforce_pwd*"
+> 有些外部程序启动时不在此程序所在目录启动，导致工作目录错误而读取不到配置。为了应对这种问题，请在本程序所在位置创建"*CBJQ_SS.QS.\*.exe<span style="color:green">.enforce_pwd</span>*"文件。例如："*CBJQ_SS.QS.kingsoft.exe<span style="color:green">.enforce_pwd</span>*"
 
 ## 构建
 
