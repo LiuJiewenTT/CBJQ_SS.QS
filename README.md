@@ -1,6 +1,8 @@
 ---
 LANG: zh_CN.UTF-8
 date: 2024-06-25 23:38:00 +0800
+redirect_from:
+  - /README/
 ---
 
 # CBJQ_SS QuickStart
