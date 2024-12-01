@@ -1,8 +1,3 @@
 plugins:
   - jekyll-redirect-from
-
-readme_index:
-  enabled: true
-  patterns:
-    - "README.md"
   
